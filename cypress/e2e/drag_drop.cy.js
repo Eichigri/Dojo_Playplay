@@ -14,7 +14,7 @@ describe('template spec', () => {
         })
         it('Créer une vidéo et la télécharger', () => {
                 cy.get('.pp__start-from-scratch-card').click();
-                cy.wait(4000);
+                cy.wait(6000);
                 // Soucis click simple / double ?
                 cy.get('.pp__screens-timeline__add-screen-cta > .ds__button-wrapper').click();
                 //cy.get('.pp__screens-timeline__add-screen-cta > .ds__button-wrapper').click();
@@ -25,8 +25,11 @@ describe('template spec', () => {
                 cy.get('[data-heap-label="pp__stock-filters__gif"]').click();
                 cy.get('.search-input__input').type("panda");
                 cy.get(".search-input__icon").click();
-                cy.get(':nth-child(3) > .media-thumbnail > .media-wrapper > .media-title-tooltip > .media-image-item').drag('.upload-container');
-                cy.wait(2000);
+                cy.get(':nth-child(3) > .media-thumbnail > .media-wrapper > .media-title-tooltip > .media-image-item').trigger('dragstart');
+                cy.get('.upload-container')
+                  .trigger('dragenter', { force: true })
+                  .trigger('dragover', { force: true })
+                  .trigger('drop', { force: true })
                 cy.get('[data-cy="mediaEdition_keepSize_toggle"] > .ds__switcher__bar').click();
                 cy.get('[data-cy="mediaEditionModal_save_button"]').click();
         })
